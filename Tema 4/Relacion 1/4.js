@@ -1,4 +1,8 @@
-document.addEventListener('click', canvas);
+document.addEventListener('click', main);
+
+function main() {
+    canvas();
+}
 
 function canvas() {
     document.write("<table>");
