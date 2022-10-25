@@ -1,9 +1,62 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    background-color: #232323;
+}
+
+h1 {
+    margin: 0px;
+    padding: 24px 0px;
+    background-color: #2d8e99;
+    color: white;
+}
+
+h2 {
+    margin: 0px;
+}
+
+.options_container {
+    background-color: white;
+    margin-bottom: 24px;
+}
+
+.options_container p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px 10px;
+}
+
+.options_container p:hover {
+    background-color: #2d8e99;
+    color: white;
+    transition: 300ms;
+}
+
+.options {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    max-width: 40%;
+    margin: 0 auto;
+    color: #2d8e99;
+}
+
+.dificultad {
+    display: flex;
+}
+
+.hard {
+    margin-left: 15px;
+}
+
 .container {
     display: grid;
     grid-template-columns: auto auto auto;
     max-width: 40%;
     column-gap: 15px;
     row-gap: 15px;
+    margin: 0 auto;
 }
 
 .container div {

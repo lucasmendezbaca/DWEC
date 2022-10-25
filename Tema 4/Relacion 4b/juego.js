@@ -3,8 +3,8 @@ function random(number) {
 }
 
 var adivinarColor = undefined;
-let iteracionAleatoria = random(5);
 function colorearDivs() {
+    let iteracionAleatoria = random(5);
     const divs = document.getElementsByClassName("hijo");
     let contadorIteraciones = 0;
     for(let div of divs) {
@@ -16,12 +16,12 @@ function colorearDivs() {
 
         contadorIteraciones++;
     }
+    document.getElementsByTagName("h1")[0].innerHTML = adivinarColor;
 
 }
 
 colorearDivs();
 
-document.getElementsByTagName("h1")[0].innerHTML = adivinarColor;
 
 for(let i=0; i<=6; i++) {
     document.getElementsByClassName("hijo")[i].onclick = colorCorrecto;
@@ -37,7 +37,7 @@ function colorCorrecto(e) {
         colorearDivs();
     }else {
         document.getElementsByTagName("h2")[0].innerHTML = "";
-        e.target.style.backgroundColor = 'white';
+        e.target.style.backgroundColor = '#232323';
         numeroIntentos++;
     }
 }
