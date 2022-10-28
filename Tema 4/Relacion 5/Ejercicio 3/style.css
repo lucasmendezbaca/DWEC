@@ -1,0 +1,48 @@
+body {
+    background-color: #ef767a;
+}
+
+form {
+    max-width: 280px;
+    margin: auto;
+    margin-top: calc(50vh - (147px / 2));
+}
+
+input[type="text"] {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    border: none;
+    border-bottom: 2px solid #fedbb4;
+    background-color: #ef767a;
+    color: #f4a9aa;
+}
+
+input[type="text"]::placeholder {
+    color: #f4a9aa;
+}
+
+input[type="text"]:focus-visible {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #fedbb4;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: auto;
+    background-color: #f6a896;
+    border: 0px;
+    border-radius: 4px;
+    padding: 7px 30px;
+    color: #ef767a;
+    font-size: 18px;
+}
+
+ul {
+    padding: 0px;
+    margin-left: 48px;
+    color: #fcd0a1;
+    letter-spacing: 1px;
+    font-size: 20px;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="imagen">
+
+    </div>
+    <section class="informacion">
+        <h1>Welcome to Crowdrise</h1>
+        <p>Let's get you all set up so can verify your nonprofit and begin setting up your first campaign!</p>
+        <p class="login">Already have an account? <a href="">Log in</a></p>
+        <form action="index.html">
+            <!-- crear label e input para First Name, Last Name, Phone, Email, Password, Confirm Password. Cada par de elementos label e input estaran dentro de un div con clase campo_formulario -->
+            <div class="campos_formulario">
+                <div class="campo_formulario">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name">
+                </div>
+                <div class="campo_formulario">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name">
+                </div>
+                <div class="campo_formulario">
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone">
+                </div>
+                <div class="campo_formulario">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="campo_formulario">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password">
+                </div>
+                <div class="campo_formulario">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="text" id="confirm_password" name="confirm_password">
+                </div>
+            </div>
+            <div class="campo_formulario">
+                <input type="checkbox" id="recive_emails" name="recive_emails">
+                <label for="recive_emails">Yes, I want to recive Crowdirse's emails</label>
+            </div>
+            <div class="campo_formulario">
+                <input type="checkbox" id="terms" name="terms">
+                <label for="terms">I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></label>
+            </div>
+
+            <input type="submit" value="Sing Up">
+        </form>
+    </section>
+</body>
+</html>

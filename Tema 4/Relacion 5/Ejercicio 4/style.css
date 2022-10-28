@@ -1,0 +1,81 @@
+:root {
+    --color_label: rgb(86, 86, 86);
+    --color_texto: gray;
+    --color_enlace: #0c9de9;
+    --color_borde_input: rgb(173, 173, 173);
+}
+
+body {
+    margin: 0px;
+    display: flex;
+}
+
+.campos_formulario {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.imagen {
+    width: 45%;
+    height: 100vh;
+    background-color: rgb(0, 99, 185);
+}
+
+.informacion {
+    padding: 60px 100px;
+}
+
+h1 {
+    color: var(--color_label);
+}
+
+label {
+    display: block;
+    color: var(--color_label);
+    margin-bottom: 10px;
+}
+
+label[for="terms"],
+label[for="recive_emails"] {
+    display: inline;
+    color: var(--color_texto);
+}
+
+input {
+    margin-bottom: 14px;
+    height: 24px;
+    border: 1px var(--color_borde_input) solid;
+    border-radius: 4px;
+    width: 80%;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 0px;
+    height: auto;
+    width: auto;
+}
+
+input[type="submit"] {
+    display: block;
+    width: auto;
+    height: auto;
+    margin-top: 40px;
+    padding: 12px 30px;
+    border: none;
+    background-color: var(--color_enlace);
+    color: white;
+}
+
+p {
+    color: var(--color_texto);
+}
+
+a {
+    color: var(--color_enlace);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+p:first-of-type {
+    margin-bottom: 44px;
+}
