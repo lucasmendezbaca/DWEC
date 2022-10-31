@@ -19,6 +19,13 @@ body {
     width: 45%;
     height: 100vh;
     background-color: rgb(0, 99, 185);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen img {
+    width: 80%;
 }
 
 .informacion {
