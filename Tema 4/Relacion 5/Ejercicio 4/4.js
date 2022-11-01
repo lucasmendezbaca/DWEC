@@ -18,9 +18,9 @@ function validarContrasena(cadena) {
     return patron.test(cadena);
 }
 
-function validarConfirmarContrasena(contrasena, cadena) {
+function validarConfirmarContrasena(cadena) {
     var patron = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-    return patron.test(cadena) && contrasena === cadena;
+    return patron.test(cadena) && constrasena.value === cadena;
 }
 
 function validarTerminos(elemento) {
@@ -35,110 +35,42 @@ const constrasena = document.getElementById('password');
 const confirmarContrasena = document.getElementById('confirm_password');
 const terminos = document.getElementById('terms');
 
-// Nombre
-function validacionNombre() {
-    if (validarNombre(nombre.value)) {
-        nombre.style.border = '1px solid green';
-        nombre.style.backgroundColor = '#BDECB6';
+function validacionCampo(validador, campo) {
+    if (validador(campo.value)) {
+        campo.style.border = '1px solid green';
+        campo.style.backgroundColor = '#BDECB6';
     } else {
-        nombre.style.border = '1px solid red';
-        nombre.style.backgroundColor = '#FF6961';
+        campo.style.border = '1px solid red';
+        campo.style.backgroundColor = '#FF6961';
     }
 }
 
 nombre.addEventListener('blur', function() {
-    validacionNombre();
+    validacionCampo(validarNombre, nombre);
 });
-
-// Apellidos
-function validacionApellidos() {
-    if (validarNombre(apellidos.value)) {
-        apellidos.style.border = '1px solid green';
-        apellidos.style.backgroundColor = '#BDECB6';
-    } else {
-        apellidos.style.border = '1px solid red';
-        apellidos.style.backgroundColor = '#FF6961';
-    }
-}
 
 apellidos.addEventListener('blur', function() {
-    validacionApellidos();
+    validacionCampo(validarNombre, apellidos);
 });
-
-// Teléfono
-function validacionTelefono() {
-    if (validarTelefonoMovil(telefono.value)) {
-        telefono.style.border = '1px solid green';
-        telefono.style.backgroundColor = '#BDECB6';
-    } else {
-        telefono.style.border = '1px solid red';
-        telefono.style.backgroundColor = '#FF6961';
-    }
-}
 
 telefono.addEventListener('blur', function() {
-    validacionTelefono();
+    validacionCampo(validarTelefonoMovil, telefono);
 });
-
-// Email
-function validacionEmail() {
-    if (validarEmail(email.value)) {
-        email.style.border = '1px solid green';
-        email.style.backgroundColor = '#BDECB6';
-    } else {
-        email.style.border = '1px solid red';
-        email.style.backgroundColor = '#FF6961';
-    }
-}
 
 email.addEventListener('blur', function() {
-    validacionEmail();
+    validacionCampo(validarEmail, email);
 });
-
-// Contraseña
-function validacionContrasena() {
-    if (validarContrasena(constrasena.value)) {
-        constrasena.style.border = '1px solid green';
-        constrasena.style.backgroundColor = '#BDECB6';
-    } else {
-        constrasena.style.border = '1px solid red';
-        constrasena.style.backgroundColor = '#FF6961';
-    }
-
-}
 
 constrasena.addEventListener('blur', function() {
-    validacionContrasena();
+    validacionCampo(validarContrasena, constrasena);
 });
-
-// Confirmar contraseña
-function validacionConfirmarContrasena() {
-    if (validarConfirmarContrasena(constrasena.value, confirmarContrasena.value)) {
-        confirmarContrasena.style.border = '1px solid green';
-        confirmarContrasena.style.backgroundColor = '#BDECB6';
-    } else {
-        confirmarContrasena.style.border = '1px solid red';
-        confirmarContrasena.style.backgroundColor = '#FF6961';
-    }
-}
 
 confirmarContrasena.addEventListener('blur', function() {
-    validacionConfirmarContrasena();
+    validacionCampo(validarConfirmarContrasena, confirmarContrasena);
 });
 
-// Terminos
-function validacionTerminos() {
-    if (validarTerminos(terminos)) {
-        terminos.style.border = '1px solid green';
-        terminos.style.backgroundColor = '#BDECB6';
-    } else {
-        terminos.style.border = '1px solid red';
-        terminos.style.backgroundColor = '#FF6961';
-    }
-}
-
 terminos.addEventListener('blur', function() {
-    validacionTerminos();
+    validacionCampo(validarTerminos, terminos);
 });
 
 function validarFormulario(e) {
@@ -147,13 +79,13 @@ function validarFormulario(e) {
     } else {
         e.preventDefault();
 
-        validacionNombre();
-        validacionApellidos();
-        validacionTelefono();
-        validacionEmail();
-        validacionContrasena();
-        validacionConfirmarContrasena();
-        validacionTerminos();
+        validacionCampo(validarNombre, nombre);
+        validacionCampo(validarNombre, apellidos);
+        validacionCampo(validarTelefonoMovil, telefono);
+        validacionCampo(validarEmail, email);
+        validacionCampo(validarContrasena, constrasena);
+        validacionCampo(validarConfirmarContrasena, confirmarContrasena);
+        validacionCampo(validarTerminos, terminos);
 
         const error = document.getElementById('error');
         error.innerHTML = 'Complete el formulario correctamente';
