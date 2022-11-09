@@ -1,9 +1,8 @@
-import { Book, BookList } from "./Clases";
+import { Book, BookList } from "./Clases.js";
 
-myLibrary = new BookList();
+var myLibrary = new BookList();
 
-function addBookToLibrary(e) {
-    e.preventDefault();
+function addBookToLibrary() {
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const genre = document.getElementById("genre").value;
@@ -20,15 +19,15 @@ function displayBooks() {
         const bookDiv = document.createElement("div");
         bookDiv.className = "libro";
         bookDiv.innerHTML = `
-                <h2>${book.title}</h2>
-                <p>Author: ${book.author}</p>
-                <p>Genre: ${book.genre}</p>
+                <div class="titulo_autor">
+                    <h2>${book.title}</h2>
+                    <p>Author: ${book.author}</p>
+                <div>
                 <p>Read: ${book.read}</p>
-                <p>Read Date: ${book.readDate}</p>
             `;
-        booksDiv.appendChild(bookDiv);
+        readingList.appendChild(bookDiv);
     });
 }
 
-const formulario = document.getElementById("formulario");
-formulario.addEventListener("submit", addBookToLibrary);
+const boton = document.getElementById("submit");
+boton.addEventListener("click", addBookToLibrary);
