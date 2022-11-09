@@ -1,0 +1,40 @@
+body {
+    background-color: #eaeaea;
+}
+
+h1 {
+    text-align: center;
+}
+
+.inputs_flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input_flex{
+    flex-basis: 45%;
+}
+
+.main_container {
+    display: flex;
+}
+
+input[type="text"] {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.reading_list {
+    margin-left: 50px;
+    width: 100%;
+}
+
+.libro {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 100px;
+    padding: 0px 20px;
+    background-color: white;
+}
+
+

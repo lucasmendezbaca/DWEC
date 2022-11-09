@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" alt="">
+    <h1>The Reading List</h1>
+
+    <div class="main_container">
+        <div class="formulario">
+            <h2>Book</h2>
+
+            <form action="index.htlm">
+                <label for="title">Title</label><br>
+                <input type="text" name="title" id="title" placeholder="Title"><br>
+
+                <div class="inputs_flex">
+                    <div class="input_flex">
+                        <label for="author">Author</label><br>
+                        <input type="text" name="author" id="author" placeholder="Author">
+                    </div>
+
+                    <div class="input_flex">
+                        <label for="genre">Genre</label><br>
+                        <input type="text" name="genre" id="genre">
+                    </div>
+                </div>
+
+                <hr>
+
+                <button id="submit" type="submit">Add Book</button>
+            </form>
+        </div>
+
+        <div id="reading_list" class="reading_list">
+            <h2>My Reading List</h2>
+            <div class="libro">
+                <div class="titulo_autor">
+                    <h3>Titulo</h3>
+                    <p>Autor</p>
+                </div>
+                <p>Not Read</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="index.js" type="module"></script>
+</body>
+</html>
