@@ -1,0 +1,21 @@
+body {
+    background-color: #c1d72f;
+    text-align: center;
+    color: white;
+}
+
+button {
+    padding: 12px;
+    background-color: white;
+    color: #c1d72f;
+    border-style: none;
+    border-radius: 6px;
+}
+
+.letra_palabra {
+    border-bottom: 2px solid white;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 4px;
+    color: transparent;
+}
