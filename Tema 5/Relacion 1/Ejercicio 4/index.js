@@ -10,5 +10,6 @@ const elemento = document.getElementById("elemento");
 
 button.addEventListener("click", function() {
     addElement(elemento)
+    elemento.value = "";
 });
 
