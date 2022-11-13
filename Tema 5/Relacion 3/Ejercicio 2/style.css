@@ -2,12 +2,18 @@ html {
     all: initial;
 }
 body {
+    margin: 0px;
+    min-height: 100vh;
     background-color: #c1d72f;
     text-align: center;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 button {
+    margin-top: 10px;
     padding: 12px;
     background-color: white;
     color: #c1d72f;
@@ -47,6 +53,12 @@ button {
   font-size:8em;
   text-align:center;
   animation: example 1s infinite;
+}
+
+#volver_jugar {
+    color: white;
+    background-color: #c1d72f;
+    font-size: 24px;
 }
 
 @keyframes example {

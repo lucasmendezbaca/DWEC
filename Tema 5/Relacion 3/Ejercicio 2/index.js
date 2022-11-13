@@ -1,11 +1,27 @@
 const palabras = ["HOLA", "ADIOS", "PERRO", "GATO", "CASA", "COCHE", "MESA", "SILLA", "ORDENADOR", "LIBRO", "PAPEL", "LAPIZ", "BOLIGRAFO", "PIZARRA", "VENTANA", "PUERTA", "SUELO", "TECHO", "PARED", "CAMA", "SILLON", "SOFA", "ALFOMBRA", "LAMPARA", "MESA", "SILLA", "ORDENADOR", "LIBRO", "PAPEL", "LAPIZ", "BOLIGRAFO", "PIZARRA", "VENTANA", "PUERTA", "SUELO", "TECHO", "PARED", "CAMA", "SILLON", "SOFA", "ALFOMBRA", "LAMPARA", "MESA", "SILLA", "ORDENADOR", "LIBRO", "PAPEL", "LAPIZ", "BOLIGRAFO", "PIZARRA", "VENTANA", "PUERTA", "SUELO", "TECHO", "PARED", "CAMA", "SILLON", "SOFA", "ALFOMBRA", "LAMPARA", "MESA", "SILLA", "ORDENADOR", "LIBRO", "PAPEL", "LAPIZ", "BOLIGRAFO", "PIZARRA", "VENTANA", "PUERTA", "SUELO", "TECHO", "PARED", "CAMA", "SILLON", "SOFA", "ALFOMBRA", "LAMPARA", "MESA", "SILLA", "ORDENADOR", "LIBRO", "PAPEL", "LAPIZ", "BOLIGRAFO", "PIZARRA", "VENTANA", "PUERTA", "SUELO", "TECHO", "PARED", "CAMA", "SILLON", "SOFA", "ALFOMBRA", "LAMPARA", "MESA", "SILLA", "ORDENADOR", "LIBRO"];
-const palabra = palabras[Math.floor(Math.random() * palabras.length)];
+var palabra = undefined;
+var letrasPalabra = undefined;
+var letrasAcertadas = 0;
+var vidas = 10;
 
-function resetGame() {
-    mostrarPosicionesPalabra(palabra);
+function generarPalabra() {
+    return palabras[Math.floor(Math.random() * palabras.length)];
 }
 
-resetGame();
+function resetGame() {
+    vidas = 10;
+    document.getElementById("vidas").innerText = vidas;
+    document.getElementById("palabra").innerHTML = "";
+    palabra = generarPalabra();
+    letrasPalabra = palabra.length;
+    letrasAcertadas = 0;
+    mostrarPosicionesPalabra(palabra);
+    const botones = document.querySelectorAll("button");
+    botones.forEach(boton => {
+        boton.disabled = false;
+        boton.style.opacity = "1";
+    });
+}
 
 function mostrarPosicionesPalabra(palabra) {
     for (let i = 0; i < palabra.length; i++) {
@@ -23,15 +39,26 @@ botones.forEach(boton => {
     boton.addEventListener("click", mostrarEnPalabra);
 });
 
-var vidas = 10;
 function restarVidas(e) {
     const letra = e.target.innerText;
+
+    // numero de veces que aparece la letra en la palabra
+    const numLetras = palabra.split(letra).length - 1;
+
     if(!palabra.includes(letra)){
         vidas--;
+        console.log(letrasAcertadas);
+    } else{
+        letrasAcertadas += numLetras;
+        console.log(letrasAcertadas);
+        if(letrasAcertadas === palabra.length){
+            endGame("Has ganado!");
+        }
     }
+
     document.getElementById("vidas").innerText = vidas;
     if (vidas === 0) {
-        gameOver();
+        endGame("GAME OVER");
     }
 }
 
@@ -50,8 +77,10 @@ function mostrarEnPalabra(e) {
     });
 }
 
-function gameOver() {
+function endGame(mensaje) {
     const gameOver = document.getElementById("game_over_container");
+    const endMessage = document.getElementById("game_over");
+    endMessage.innerHTML = mensaje;
     gameOver.style.display = "block";
 
     const html = document.getElementById("html");
@@ -61,3 +90,6 @@ function gameOver() {
         resetGame();
     });
 }
+
+// Ejecución del programa
+resetGame();
