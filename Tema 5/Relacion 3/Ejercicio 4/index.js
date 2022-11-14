@@ -1,6 +1,31 @@
+var lista = [];
 const productContainer = document.getElementById("productos");
 const submitButton = document.getElementById("submit");
 const clearButton = document.getElementById("clear");
+
+window.onload = () => {
+    let lista_deserializada = JSON.parse(localStorage.getItem("lista"));
+
+    if (lista_deserializada == null) {
+        lista_deserializada = [];
+    }
+
+    lista_deserializada.forEach((product) => {
+        addProduct(product);
+    });
+};
+
+function addLocalStorage(product) {
+    lista.push(product);
+    let lista_serializada = JSON.stringify(lista);
+    localStorage.setItem("lista", lista_serializada);
+}
+
+function removeLocalStorage(product) {
+    lista = lista.filter((element) => element !== product);
+    let lista_serializada = JSON.stringify(lista);
+    localStorage.setItem("lista", lista_serializada);
+}
 
 function addProduct(product) {
     const productElement = document.createElement("div");
@@ -14,6 +39,8 @@ function addProduct(product) {
     `;
     productContainer.appendChild(productElement);
 
+    addLocalStorage(product);
+
     const deleteButton = productElement.querySelector("#borrar");
     deleteButton.addEventListener("click", deleteProduct);
 
@@ -23,6 +50,9 @@ function addProduct(product) {
 
 function deleteProduct(event) {
     event.target.parentElement.parentElement.remove();
+    let product = event.target.parentElement.parentElement.querySelector(".producto__nombre").textContent;
+
+    removeLocalStorage(product);
 }
 
 function editProduct(event) {
@@ -58,4 +88,5 @@ submitButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", () => {
     productContainer.innerHTML = "";
+    localStorage.clear();
 });
