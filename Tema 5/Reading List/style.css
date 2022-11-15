@@ -17,6 +17,8 @@ h1 {
 
 .main_container {
     display: flex;
+    max-width: 80%;
+    margin: 0px auto;
 }
 
 input[type="text"] {
@@ -35,6 +37,19 @@ input[type="text"] {
     margin-right: 100px;
     padding: 0px 20px;
     background-color: white;
+    margin-bottom: 20px;
 }
 
+#cambiar_vista {
+}
 
+.view_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 10px;
+    column-gap: 20px;
+}
+
+.libro_view_grid {
+    width: 100%;
+}

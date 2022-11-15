@@ -31,3 +31,9 @@ function displayBooks() {
 
 const boton = document.getElementById("submit");
 boton.addEventListener("click", addBookToLibrary);
+
+const cambiarVista = document.getElementById("cambiar_vista");
+cambiarVista.addEventListener("click", () => {
+    const readingList = document.getElementById("reading_list");
+    readingList.classList.toggle("view_grid");
+});
