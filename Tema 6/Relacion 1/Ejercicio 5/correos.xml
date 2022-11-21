@@ -1,0 +1,16 @@
+<correos>
+    <correo>
+        <emisor>Jose</emisor>
+        <email>jose@jose.com</email>
+        <asunto>Asunto 1</asunto>
+        <mensaje>Mensaje 1</mensaje>
+        <fecha>2015-01-01</fecha>
+    </correo>
+    <correo>
+        <emisor>Pepe</emisor>
+        <email>pepe@pepe.com</email>
+        <asunto>Asunto 2</asunto>
+        <mensaje>Mensaje 2</mensaje>
+        <fecha>2015-01-02</fecha>
+    </correo>
+</correos>
