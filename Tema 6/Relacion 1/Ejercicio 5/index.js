@@ -10,18 +10,17 @@ window.addEventListener("load", function () {
             for(let i = 0; i < correosXML.length; i++){
                 let correo = document.createElement("div");
                 correo.className = "correo";
-                let emisor = document.createElement("div");
-                emisor.className = "emisor";
-                emisor.textContent = correosXML[i].getElementsByTagName("emisor")[0].textContent;
-                let asunto = document.createElement("div");
-                asunto.className = "asunto";
-                asunto.textContent = correosXML[i].getElementsByTagName("asunto")[0].textContent;
-                let fecha = document.createElement("div");
-                fecha.className = "fecha";
-                fecha.textContent = correosXML[i].getElementsByTagName("fecha")[0].textContent;
-                correo.appendChild(emisor);
-                correo.appendChild(asunto);
-                correo.appendChild(fecha);
+
+                correo.innerHTML = `
+                    <div class="correo__cabecera">
+                        <div class="correo__cabecera__asunto">${correosXML[i].getElementsByTagName("asunto")[0].textContent}</div>
+                        <div class="correo__cabecera__fecha">${correosXML[i].getElementsByTagName("fecha")[0].textContent}</div>
+                    </div>
+                    <div class="correo__cuerpo">
+                        <div class="correo__cuerpo__remitente">${correosXML[i].getElementsByTagName("emisor")[0].textContent}</div>
+                        <div class="correo__cuerpo__mensaje">${correosXML[i].getElementsByTagName("mensaje")[0].textContent}</div>
+                    </div>
+                `;
                 correos.appendChild(correo);
             }
 
