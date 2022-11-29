@@ -1,0 +1,37 @@
+body {
+    margin: 0px;
+    background-color: #222222;
+    color: white;
+}
+
+.container {
+    padding: 30px 50px;
+}
+
+#tarea_input {
+    width: calc(100% - 56px);
+    height: 66px;
+    font-size: 20px;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+.num_tareas {
+    display: flex;
+    align-items: center;
+}
+
+.tarea__info {
+    display: flex;
+}
+
+.tarea__info__nombre {
+    flex-grow: 1;
+}
+
+.tarea__prioridad {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 50%;
+}
