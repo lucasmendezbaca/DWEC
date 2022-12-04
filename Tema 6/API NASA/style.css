@@ -1,0 +1,23 @@
+.container {
+    padding: 20px 40px;
+}
+
+.pictures {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    grid-gap: 20px;
+}
+
+.picture {
+    text-align: center;
+}
+
+.picture__img__container {
+    height: 277px;
+}
+
+.picture__img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
