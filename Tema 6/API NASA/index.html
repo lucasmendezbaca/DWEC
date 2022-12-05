@@ -11,14 +11,20 @@
     <div class="container">
         <h1>NASA Pictures</h1>
 
-        <label for="startDate">Start Date</label>
-        <input type="date" name="startDate" id="startDate"><br>
+        <nav>
+            <div class="searchByDay">
+                <label for="startDate">Start Date</label>
+                <input type="date" name="startDate" id="startDate"><br>
 
-        <label for="endDate">End Date</label>
-        <input type="date" name="endDate" id="endDate"><br>
-        <button id="searchByDay">Get Picture</button>
+                <label for="endDate">End Date</label>
+                <input type="date" name="endDate" id="endDate"><br>
+                <button id="searchByDay">Get Picture</button>
 
-        <button id="randomPictures">Random Pictures</button>
+            </div>
+
+            <button id="randomPictures">Random Pictures</button>
+        </nav>
+
         <hr>
 
         <div id="pictures" class="pictures">

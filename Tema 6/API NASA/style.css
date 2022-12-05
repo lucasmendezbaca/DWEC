@@ -16,6 +16,13 @@ hr {
     padding: 20px 40px;
 }
 
+/* Inicio buscadores */
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+/* Fin buscadores */
+
 .pictures {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
