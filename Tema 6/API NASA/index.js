@@ -1,17 +1,33 @@
 var uploadedPictures = [];
-
+const numberPictures = '&count=9';
+const startDate = document.getElementById('startDate');
+const endDate = document.getElementById('endDate');
+const searchByDayBtn = document.getElementById('searchByDay');
+const randomPictures = document.getElementById('randomPictures');
+const pictures = document.getElementById('pictures');
 const body = document.querySelector('body');
 
-const button = document.getElementById('btn');
-button.addEventListener('click', () => {
-    getPictures();
+window.addEventListener('load', () => {
+    getPictures(numberPictures);
 });
 
-function getPictures() {
+randomPictures.addEventListener('click', () => {
+    pictures.innerHTML = '';
+    getPictures(numberPictures);
+    window.addEventListener('scroll', getMorePictures);
+});
+
+searchByDayBtn.addEventListener('click', () => {
+    pictures.innerHTML = '';
+    let param = `&start_date=${startDate.value}&end_date=${endDate.value}`;
+    getPictures(param);
+    window.removeEventListener('scroll', getMorePictures);
+});
+
+function getPictures(params) {
     let xhr = new XMLHttpRequest();
     let url = 'https://api.nasa.gov/planetary/apod?';
     let apiKey = 'api_key=qDNrEUMgNU8CN5gHKk8D7O6zjb20s6kn2DnKvCIU';
-    let params = '&count=9';
 
     xhr.open('GET', url + apiKey + params, true);
 
@@ -24,7 +40,6 @@ function getPictures() {
 }
 
 function createPictures(dataJSON) {
-    const pictures = document.getElementById('pictures');
     for (let picture of dataJSON) {
         const pictureItem = document.createElement('div');
         pictureItem.classList.add('picture');
@@ -55,25 +70,26 @@ function showDetailPicture(date) {
     pictureDetailImg.src = detailPicture.url;
 
     const pictureDetailTitle = document.querySelector('.picture_detail__title');
-    pictureDetailTitle.innerHTML = 'Titulo: ' + detailPicture.title;
+    pictureDetailTitle.innerHTML = detailPicture.title;
 
     const pictureDetailDate = document.querySelector('.picture_detail__date');
     pictureDetailDate.innerHTML = 'Fecha: ' + detailPicture.date;
 
     const pictureDetailExplanation = document.querySelector('.picture_detail__explanation');
-    pictureDetailExplanation.innerHTML = 'Descripción: ' + detailPicture.explanation;
+    pictureDetailExplanation.innerHTML = detailPicture.explanation;
 
     const pictureDetailCopyright = document.querySelector('.picture_detail__copyright');
     pictureDetailCopyright.innerHTML = 'Copyright: ' + detailPicture.copyright;
 }
 
-// window.addEventListener('scroll', () => {
-//     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+window.addEventListener('scroll', getMorePictures);
+function getMorePictures() {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-//     if (clientHeight + scrollTop >= scrollHeight - 5) {
-//         getPictures();
-//     }
-// });
+    if (clientHeight + scrollTop >= scrollHeight - 5) {
+        getPictures(numberPictures);
+    }
+}
 
 const pictureDetail = document.getElementById('picture_detail');
 const menuHamburguesa = document.getElementById('menu__hamburguesa');

@@ -9,12 +9,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Prueba peticion Ayax</h1>
+        <h1>NASA Pictures</h1>
 
-        <button id="btn">Click</button>
-        <br>
+        <label for="startDate">Start Date</label>
+        <input type="date" name="startDate" id="startDate"><br>
+
+        <label for="endDate">End Date</label>
+        <input type="date" name="endDate" id="endDate"><br>
+        <button id="searchByDay">Get Picture</button>
+
+        <button id="randomPictures">Random Pictures</button>
         <hr>
-        <br>
 
         <div id="pictures" class="pictures">
         </div>
