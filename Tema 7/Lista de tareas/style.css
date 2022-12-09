@@ -79,6 +79,30 @@ body {
 .num_tareas {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.num_tareas__info {
+    border-right: 1px solid white;
+    padding-right: 10px;
+}
+
+.num_tareas p{
+    display: flex;
+    align-items: center;
+}
+
+.num_tareas img {
+    max-width: 14px;
+    margin-right: 4px;
+}
+
+.num_tareas__info img {
+    max-width: 20px;
+}
+
+#borrarTareas {
+    color: #f39c12;
 }
 
 .tarea__info__nombre {
@@ -106,6 +130,11 @@ body {
     align-items: center;
     justify-content: space-between;
     max-width: 50%;
+}
+
+.low img,
+.high img {
+    margin-bottom: -8px;
 }
 
 .tarea__prioridad p {
