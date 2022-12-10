@@ -18,10 +18,21 @@ body {
     padding-right: 28px;
 }
 
+.tareas {
+    border-radius: 12px;
+    border: 1px solid white;
+    border-style: inset;
+    overflow: hidden;
+}
+
 .tarea {
     padding: 14px 28px;
     background-color: #303030;
-    border-radius: 12px;
+    border-bottom: 1px solid white;
+}
+
+.tarea:last-child {
+    border-bottom: none;
 }
 
 .tarea__info {
