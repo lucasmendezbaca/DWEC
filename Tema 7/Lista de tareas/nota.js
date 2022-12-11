@@ -1,8 +1,9 @@
 class Nota {
-    constructor (titulo, prioridad = 'low') {
+    constructor (titulo, prioridad = 'low', estado = 'pendiente', fecha = new Date()) {
         this.titulo = titulo
         this.prioridad = prioridad
-        this.fecha = new Date() 
+        this.estado = estado
+        this.fecha = fecha 
     }
 
     // obtener el tiempo en minutos desde la creación de la nota
@@ -31,6 +32,23 @@ class Nota {
         return notas
     }
 
+    // obtener el número de notas del localstorage
+    static numeroNotas () {
+        return localStorage.length
+    }
+
+    // obtener el numero de notas pendientes del localstorage
+    static numeroNotasPendientes () {
+        let notas = this.obtener()
+        let numeroNotasPendientes = 0
+        notas.forEach(nota => {
+            if (nota.estado === 'pendiente') {
+                numeroNotasPendientes++
+            }
+        })
+        return numeroNotasPendientes
+    }
+
     // ordenar las notas por prioridad
     static ordenar (notas) {
         notas.sort((a, b) => {
@@ -45,7 +63,18 @@ class Nota {
 
     // obtener la nota con el titulo indicado
     static obtenerPorTitulo (titulo) {
-        return JSON.parse(localStorage.getItem(titulo))
+        let datosNota = JSON.parse(localStorage.getItem(titulo))
+        // crear un objeto date a partir de la fecha guardada en el local storage
+        let fecha = new Date(datosNota.fecha)
+        let nota = new Nota(datosNota.titulo, datosNota.prioridad, datosNota.estado, fecha)
+        return nota;
+    }
+
+    // actualizar el estado de la nota en el local storage con el titulo indicado
+    static actualizarEstado (titulo, estado) {
+        let nota = this.obtenerPorTitulo(titulo)
+        nota.estado = estado
+        nota.guardar()
     }
 
     // actualizar la prioridad de la nota con el titulo indicado

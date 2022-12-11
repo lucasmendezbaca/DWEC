@@ -1,6 +1,42 @@
 import { Nota } from './nota.js'
 
 const tareaInput = document.getElementById('tarea_input');
+const borrarTareas = document.getElementById('borrarTareas');
+const notas = Nota.obtener();
+const notasContainer = document.getElementById('tareas');
+const numTareas = document.getElementById('numTareas');
+const numTareasPendientes = document.getElementById('numTareasPendientes');
+
+notas.forEach(nota => {
+    mostrarNota(nota);
+});
+
+function actualizarTareasContador() {
+    numTareas.textContent = Nota.numeroNotas();
+    numTareasPendientes.textContent = Nota.numeroNotasPendientes();
+}
+
+function marcaChecks() {
+    const cheks = document.querySelectorAll('.check');
+    cheks.forEach(check => {
+        check.addEventListener('click', function() {
+            check.classList.toggle('checked');
+
+            let titulo = check.nextElementSibling;
+            titulo.classList.toggle('tarea__info__nombre--checked');
+
+            let estado = check.classList.contains('checked') ? 'completada' : 'pendiente';
+            Nota.actualizarEstado(titulo.textContent, estado);
+            actualizarTareasContador();
+        });
+    });
+}
+
+borrarTareas.addEventListener('click', function() {
+    Nota.eliminarTodas();
+    notasContainer.innerHTML = '';
+    actualizarTareasContador();
+});
 
 // añadir al nota al local storage
 tareaInput.addEventListener('keypress', function(e) {
@@ -9,21 +45,19 @@ tareaInput.addEventListener('keypress', function(e) {
 
         let nota = new Nota(titulo);
         nota.guardar();
+
+        tareaInput.value = '';
+        mostrarNota(nota);
+        actualizarTareasContador();
     }
 });
 
-// mostrar todas las notas
-let notas = Nota.obtener();
-let notasContainer = document.getElementById('tareas');
-notas.forEach(nota => {
+function mostrarNota(nota) {
     notasContainer.innerHTML += `
         <div class="tarea">
             <div class="tarea__info">
-                <div class="round">
-                    <input type="checkbox" checked id="checkbox" />
-                    <label for="checkbox"></label>
-                </div>
-                <p class="tarea__info__nombre">${nota.titulo}</p>
+                <div class="check ${nota.estado === 'completada' ? 'checked' : ''}"></div>
+                <p class="tarea__info__nombre ${nota.estado === 'completada' ? 'tarea__info__nombre--checked' : ''}">${nota.titulo}</p>
                 <button class="tarea__borrar"><div class="tarea__borrar__icono"><img src="img/trash.svg" alt=""></div></button>
             </div>
             <div class="tarea__prioridad">
@@ -31,4 +65,8 @@ notas.forEach(nota => {
             </div>
         </div>
     `;
-});
+
+    marcaChecks();
+}
+
+actualizarTareasContador();
