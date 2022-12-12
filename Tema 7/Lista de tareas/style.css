@@ -18,10 +18,21 @@ body {
     padding-right: 28px;
 }
 
+.tareas {
+    border-radius: 12px;
+    border: 1px solid white;
+    border-style: inset;
+    overflow: hidden;
+}
+
 .tarea {
     padding: 14px 28px;
     background-color: #303030;
-    border-radius: 12px;
+    border-bottom: 1px solid white;
+}
+
+.tarea:last-child {
+    border-bottom: none;
 }
 
 .tarea__info {
@@ -30,60 +41,57 @@ body {
     align-items: center;
 }
 
-/* Circulito checkbox */
-.round {
-    position: relative;
-}
-
-.round label {
-    background-color: #fff;
-    border: 1px solid #ccc;
+.check {
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    cursor: pointer;
-    height: 28px;
-    left: 0;
-    position: absolute;
-    top: calc(50% - 14px);
-    width: 28px;
+    background-color: #303030;
+    border: 3px solid white;
 }
 
-.round label:after {
-    border: 2px solid #fff;
-    border-top: none;
-    border-right: none;
-    content: "";
-    height: 6px;
-    left: 7px;
-    opacity: 0;
-    position: absolute;
-    top: 8px;
-    transform: rotate(-45deg);
-    width: 12px;
+.checked {
+    border: 3px solid #66bb6a;
+    background-image: url("img/check.svg");
 }
-
-.round input[type="checkbox"] {
-    visibility: hidden;
-}
-
-.round input[type="checkbox"]:checked + label {
-    background-color: #66bb6a;
-    border-color: #66bb6a;
-}
-
-.round input[type="checkbox"]:checked + label:after {
-    opacity: 1;
-}
-
-/* Fin checkbox */
 
 .num_tareas {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.num_tareas__info {
+    border-right: 1px solid white;
+    padding-right: 10px;
+}
+
+.num_tareas p{
+    display: flex;
+    align-items: center;
+}
+
+.num_tareas img {
+    max-width: 14px;
+    margin-right: 4px;
+}
+
+.num_tareas__info img {
+    max-width: 20px;
+}
+
+#borrarTareas {
+    color: #f39c12;
 }
 
 .tarea__info__nombre {
     flex-grow: 1;
     margin-left: 20px;
+    font-size: 22px;
+}
+
+.tarea__info__nombre--checked {
+    text-decoration: line-through;
+    color: #66bb6a;
 }
 
 .tarea__borrar {
@@ -106,6 +114,11 @@ body {
     align-items: center;
     justify-content: space-between;
     max-width: 50%;
+}
+
+.low img,
+.high img {
+    margin-bottom: -8px;
 }
 
 .tarea__prioridad p {

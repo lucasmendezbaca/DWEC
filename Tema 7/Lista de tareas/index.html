@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="index.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -16,27 +15,25 @@
 
         <hr>
         <div class="num_tareas">
-            <p class="num_tareas">2 tareas pendientes de un total de 3</p> <span>&nbsp; | &nbsp;</span> <p>Borrar tareas completadas</p>
+            <p class="num_tareas__info"><img src="img/line-chart.svg" alt=""><span id="numTareasPendientes">0</span>&nbsp;tareas pendientes de un total de&nbsp;<span id="numTareas">0</span></p>  <p id="borrarTareas"><img src="img/close.svg" alt="">Borrar tareas completadas</p>
         </div>
         <hr>
 
-        <section class="tareas">
-            <div class="tarea">
+        <section id="tareas" class="tareas">
+            <!-- <div class="tarea">
                 <div class="tarea__info">
-                    <div class="round">
-                        <input type="checkbox" checked id="checkbox" />
-                        <label for="checkbox"></label>
-                    </div>
+                    <div class="check"></div>
                     <p class="tarea__info__nombre">Estudiar</p>
-                    <button class="tarea__borrar"><div class="tarea__borrar__icono"><img src="img/bxs-trash.svg" alt=""></div></button>
+                    <button class="tarea__borrar"><div class="tarea__borrar__icono"><img src="img/trash.svg" alt=""></div></button>
                 </div>
                 <div class="tarea__prioridad">
-                    <p>Prioridad:</p> <p><span class="low">Low</span> <span class="normal">Normal</span> <span class="high">High</span></p> <p class="tarea__temporizador">Añadido hace 6 minutes ago</p>
+                    <p>Prioridad:</p> <p><span class="low"><img src="img/chevron-down.svg">Low</span> <span class="normal">Normal</span> <span class="high">High<img src="img/chevron-up.svg"></span></p> <p class="tarea__temporizador">Añadido hace 6 minutes ago</p>
                 </div>
-            </div>
+            </div> -->
         </section>
 
     </div>
     
+    <script type="module" src="index.js"></script>
 </body>
 </html>
