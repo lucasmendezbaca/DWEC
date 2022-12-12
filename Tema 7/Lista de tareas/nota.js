@@ -6,22 +6,34 @@ class Nota {
         this.fecha = fecha 
     }
 
-    // obtener el tiempo en minutos desde la creación de la nota
-    get tiempo () {
-        return Math.floor((new Date() - this.fecha) / 60000)
+    static getTiempo (titulo) {
+        let nota = this.obtenerPorTitulo(titulo)
+        let fecha = nota.fecha
+        let fechaActual = new Date()
+        let tiempo = fechaActual - fecha
+        let minutos = Math.floor(tiempo / 60000)
+        return minutos
     }
 
-    // añadir la nota al localstorage
+    static getPrioridad (titulo) {
+        let nota = this.obtenerPorTitulo(titulo)
+        return nota.prioridad
+    }
+
     guardar () {
         localStorage.setItem(this.titulo, JSON.stringify(this))
     }
 
-    // eliminar la nota del localstorage
-    eliminar () {
-        localStorage.removeItem(this.titulo)
+    static eliminar (titulo) {
+        localStorage.removeItem(titulo)
     }
 
-    // obtener todas las notas del localstorage
+    static obtenerPorPrioridad () {
+        let notas = this.obtener()
+        this.ordenar(notas)
+        return notas
+    }
+
     static obtener () {
         let notas = []
         for (let i = 0; i < localStorage.length; i++) {
@@ -32,12 +44,10 @@ class Nota {
         return notas
     }
 
-    // obtener el número de notas del localstorage
     static numeroNotas () {
         return localStorage.length
     }
 
-    // obtener el numero de notas pendientes del localstorage
     static numeroNotasPendientes () {
         let notas = this.obtener()
         let numeroNotasPendientes = 0
@@ -49,35 +59,48 @@ class Nota {
         return numeroNotasPendientes
     }
 
-    // ordenar las notas por prioridad
     static ordenar (notas) {
-        notas.sort((a, b) => {
-            return a.prioridad - b.prioridad
+        notas.sort((nota1, nota2) => {
+            if (nota1.prioridad === 'high' && nota2.prioridad === 'normal') {
+                return -1
+            } else if (nota1.prioridad === 'high' && nota2.prioridad === 'low') {
+                return -1
+            } else if (nota1.prioridad === 'normal' && nota2.prioridad === 'low') {
+                return -1
+            } else if (nota1.prioridad === 'normal' && nota2.prioridad === 'high') {
+                return 1
+            } else if (nota1.prioridad === 'low' && nota2.prioridad === 'high') {
+                return 1
+            } else if (nota1.prioridad === 'low' && nota2.prioridad === 'normal') {
+                return 1
+            } else {
+                return 0
+            }
         })
     }
 
-    // eliminar todas las notas del localstorage
-    static eliminarTodas () {
-        localStorage.clear()
+    static eliminarCompletadas () {
+        let notas = this.obtener()
+        notas.forEach(nota => {
+            if (nota.estado === 'completada') {
+                this.eliminar(nota.titulo)
+            }
+        })
     }
 
-    // obtener la nota con el titulo indicado
     static obtenerPorTitulo (titulo) {
         let datosNota = JSON.parse(localStorage.getItem(titulo))
-        // crear un objeto date a partir de la fecha guardada en el local storage
         let fecha = new Date(datosNota.fecha)
         let nota = new Nota(datosNota.titulo, datosNota.prioridad, datosNota.estado, fecha)
         return nota;
     }
 
-    // actualizar el estado de la nota en el local storage con el titulo indicado
     static actualizarEstado (titulo, estado) {
         let nota = this.obtenerPorTitulo(titulo)
         nota.estado = estado
         nota.guardar()
     }
 
-    // actualizar la prioridad de la nota con el titulo indicado
     static actualizarPrioridad (titulo, prioridad) {
         let nota = this.obtenerPorTitulo(titulo)
         nota.prioridad = prioridad
