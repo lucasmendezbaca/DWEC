@@ -1,26 +1,95 @@
 import { Tarea } from './Tarea.js'
 
-const tarea_input = document.getElementById('tarea__input');
+const tareaInput = document.getElementById('tarea_input');
+const tareaContainer = document.getElementById('tareas');
+const borrarTareas = document.getElementById('borrarTareas');
+const numTareas = document.getElementById('numTareas');
+const numTareasPendientes = document.getElementById('numTareasPendientes');
 
-tarea_input.addEventListener('keypress', (e) => {
+window.onload = () => {
+    Tarea.tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+    numTareas.textContent = Tarea.numTareas();
+    numTareasPendientes.textContent = Tarea.numTareasPendientes();
+}
+
+tareaInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        const nota = new Nota(tarea_input.value);
-        nota.mostrarNota();
-        tarea_input.value = '';
+        let tarea = new Tarea(tareaInput.value);
+        mostrarTarea(tarea);
+        actualizarNumTareas();
+        actualizarTareasPendientes();
+
+        tarea.guardar();
+        tareaInput.value = '';
     }
 });
 
-function mostrarNota(nota) {
-    notasContainer.innerHTML += `
-        <div class="tarea">
+borrarTareas.addEventListener('click', () => {
+    Tarea.borrarCompletadas();
+    tareaContainer.querySelectorAll('.tarea').forEach(tareaElement => {
+        if (tareaElement.querySelector('.check').classList.contains('checked')) {
+            tareaElement.remove();
+            actualizarNumTareas();
+            actualizarTareasPendientes();
+        }
+    });
+});
+
+function habilitarBorrado(tarea, tareaElement) {
+    tareaElement.querySelector('.tarea__borrar').addEventListener('click', () => {
+        tareaElement.remove();
+        Tarea.borrarTarea(tarea.titulo);
+        actualizarNumTareas();
+        actualizarTareasPendientes();
+    });
+}
+
+function habilitarCambioEstado(tarea, tareaElement) {
+    tareaElement.querySelector('.check').addEventListener('click', () => {
+        tareaElement.querySelector('.check').classList.toggle('checked');
+        tareaElement.querySelector('.tarea__info__nombre').classList.toggle('tarea__info__nombre--checked');
+        let tareaLocalStorage = Tarea.obtenerPorTitulo(tarea.titulo);
+        let nuevoEstado = tareaLocalStorage.estado === 'pendiente' ? 'completada' : 'pendiente';
+        Tarea.actualizarEstadoTarea(tarea.titulo, nuevoEstado);
+        actualizarTareasPendientes();
+    });
+}
+
+function actualizarNumTareas() {
+    numTareas.textContent = Tarea.numTareas();
+}
+
+function actualizarTareasPendientes() {
+    numTareasPendientes.textContent = Tarea.numTareasPendientes();
+}
+
+function mostrarTarea(tarea) {
+    let tareaElement = document.createElement('div');
+    tareaElement.classList.add('tarea');
+    tareaElement.innerHTML = `
             <div class="tarea__info">
-                <div class="check ${nota.estado === 'completada' ? 'checked' : ''}"></div>
-                <p class="tarea__info__nombre ${nota.estado === 'completada' ? 'tarea__info__nombre--checked' : ''}">${nota.titulo}</p>
+                <div class="check ${tarea.estado === 'completada' ? 'checked' : ''}"></div>
+                <p class="tarea__info__nombre ${tarea.estado === 'completada' ? 'tarea__info__nombre--checked' : ''}">${tarea.titulo}</p>
                 <button class="tarea__borrar"><div class="tarea__borrar__icono"><img src="img/trash.svg" alt=""></div></button>
             </div>
             <div class="tarea__prioridad">
                 <p>Prioridad:</p> <p><span class="prioridad low"><img src="img/chevron-down.svg">Low</span> <span class="prioridad normal">Normal</span> <span class="prioridad high">High<img src="img/chevron-up.svg"></span></p> <p class="tarea__temporizador">Añadido hace 6 minutes ago</p>
             </div>
-        </div>
     `;
+
+    tareaContainer.appendChild(tareaElement);
+
+    habilitarBorrado(tarea, tareaElement);
+    habilitarCambioEstado(tarea, tareaElement); 
 }
+
+function cargarTareas() {
+    let tareas = JSON.parse(localStorage.getItem('tareas'));
+    if (tareas) {
+        tareas.forEach(tarea => {
+            mostrarTarea(tarea);
+        });
+    }
+}
+
+cargarTareas();

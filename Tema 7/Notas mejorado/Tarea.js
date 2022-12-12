@@ -1,9 +1,44 @@
 class Tarea {
+    static tareas = [];
+
     constructor (titulo, prioridad = 'low', estado = 'pendiente', fecha = new Date()) {
         this.titulo = titulo
         this.prioridad = prioridad
         this.estado = estado
         this.fecha = fecha 
+    }
+
+    guardar() {
+        Tarea.tareas.push(this);
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+    }
+
+    static borrarTarea(titulo) {
+        Tarea.tareas = Tarea.tareas.filter(tarea => tarea.titulo !== titulo);
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+    }
+
+    static actualizarEstadoTarea(titulo, estado) {
+        let tarea = Tarea.tareas.find(tarea => tarea.titulo === titulo);
+        tarea.estado = estado;
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+    }
+
+    static obtenerPorTitulo(titulo) {
+        return Tarea.tareas.find(tarea => tarea.titulo === titulo);
+    }
+
+    static borrarCompletadas() {
+        Tarea.tareas = Tarea.tareas.filter(tarea => tarea.estado === 'pendiente');
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+    }
+
+    static numTareas() {
+        return Tarea.tareas.length;
+    }
+
+    static numTareasPendientes() {
+        return Tarea.tareas.filter(tarea => tarea.estado === 'pendiente').length;
     }
 
 }
