@@ -13,6 +13,15 @@ class Tarea {
         localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
     }
 
+    static getTiempo(titulo) {
+        let tarea = Tarea.tareas.find(tarea => tarea.titulo === titulo);
+        let fechaActual = new Date();
+        let tiempo = fechaActual - tarea.fecha;
+        let minutos = Math.floor(tiempo / 60000)
+
+        return minutos;
+    }
+
     static actualizarPrioridadTarea(titulo, prioridad) {
         let tarea = Tarea.tareas.find(tarea => tarea.titulo === titulo);
         tarea.prioridad = prioridad;
@@ -38,8 +47,7 @@ class Tarea {
             }
         });
 
-        // localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
-        return Tarea.tareas;
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
     }
 
 
