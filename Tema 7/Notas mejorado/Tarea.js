@@ -38,8 +38,8 @@ class Tarea {
             }
         });
 
-        // localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
-        return Tarea.tareas;
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+        // return Tarea.tareas;
     }
 
 

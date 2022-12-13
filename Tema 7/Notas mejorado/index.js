@@ -11,6 +11,7 @@ window.onload = () => {
     Tarea.tareas = JSON.parse(localStorage.getItem('tareas')) ? JSON.parse(localStorage.getItem('tareas')) : [];
     numTareas.textContent = Tarea.numTareas();
     numTareasPendientes.textContent = Tarea.numTareasPendientes();
+    cargarTareas();
 }
 
 tareaInput.addEventListener('keypress', (e) => {
@@ -122,5 +123,3 @@ function cargarTareas() {
         });
     }
 }
-
-cargarTareas();
