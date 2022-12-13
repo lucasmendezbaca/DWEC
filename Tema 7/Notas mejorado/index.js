@@ -5,9 +5,10 @@ const tareaContainer = document.getElementById('tareas');
 const borrarTareas = document.getElementById('borrarTareas');
 const numTareas = document.getElementById('numTareas');
 const numTareasPendientes = document.getElementById('numTareasPendientes');
+const colorPrioridades = {low: 'green', normal: 'orange', high: 'red'}
 
 window.onload = () => {
-    Tarea.tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+    Tarea.tareas = JSON.parse(localStorage.getItem('tareas')) ? JSON.parse(localStorage.getItem('tareas')) : [];
     numTareas.textContent = Tarea.numTareas();
     numTareasPendientes.textContent = Tarea.numTareasPendientes();
 }
@@ -15,11 +16,11 @@ window.onload = () => {
 tareaInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         let tarea = new Tarea(tareaInput.value);
+        tarea.guardar();
         mostrarTarea(tarea);
         actualizarNumTareas();
         actualizarTareasPendientes();
 
-        tarea.guardar();
         tareaInput.value = '';
     }
 });
@@ -79,11 +80,41 @@ function mostrarTarea(tarea) {
 
     tareaContainer.appendChild(tareaElement);
 
+    let prioridades = tareaElement.querySelectorAll('.prioridad');
+    mostrarPrioridad(tarea, prioridades);
+
     habilitarBorrado(tarea, tareaElement);
     habilitarCambioEstado(tarea, tareaElement); 
+    habilitarCambioPrioridad(tarea, prioridades);
+}
+
+function mostrarPrioridad(tarea, prioridades) {
+    prioridades.forEach(prioridad => {
+        if(prioridad.classList.contains(tarea.prioridad)) {
+            prioridad.style.backgroundColor = colorPrioridades[tarea.prioridad];
+            prioridad.style.color = 'white';
+        } else {
+            prioridad.style.backgroundColor = '#464545';
+            prioridad.style.color = '#999999';
+        }
+    });
+}
+
+function habilitarCambioPrioridad(tarea, prioridades) {
+    prioridades.forEach(prioridad => {
+        prioridad.addEventListener('click', () => {
+            let nuevaPrioridad = prioridad.classList[1];
+            Tarea.actualizarPrioridadTarea(tarea.titulo ,nuevaPrioridad);
+            let tareaActualizada = Tarea.obtenerPorTitulo(tarea.titulo);
+            mostrarPrioridad(tareaActualizada, prioridades);
+            tareaContainer.innerHTML = '';
+            cargarTareas();
+        });
+    });
 }
 
 function cargarTareas() {
+    Tarea.ordenarPorPrioridad();
     let tareas = JSON.parse(localStorage.getItem('tareas'));
     if (tareas) {
         tareas.forEach(tarea => {

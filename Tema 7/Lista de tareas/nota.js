@@ -1,11 +1,9 @@
 class Nota {
-<<<<<<< HEAD
   constructor(titulo, prioridad) {
     this.titulo = titulo;
     this.prioridad = prioridad;
   }
 }
-=======
     constructor (titulo, prioridad = 'low', estado = 'pendiente', fecha = new Date()) {
         this.titulo = titulo
         this.prioridad = prioridad
@@ -116,4 +114,3 @@ class Nota {
 }
 
 export {Nota};
->>>>>>> 6bb3a33efce273ac4ce557aa45afcafbde55a6d0

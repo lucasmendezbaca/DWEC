@@ -13,6 +13,36 @@ class Tarea {
         localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
     }
 
+    static actualizarPrioridadTarea(titulo, prioridad) {
+        let tarea = Tarea.tareas.find(tarea => tarea.titulo === titulo);
+        tarea.prioridad = prioridad;
+        localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+    }
+
+    static ordenarPorPrioridad() {
+        Tarea.tareas.sort((a, b) => {
+            if (a.prioridad === 'high' && b.prioridad === 'normal') {
+                return -1
+            } else if (a.prioridad === 'high' && b.prioridad === 'low') {
+                return -1
+            } else if (a.prioridad === 'normal' && b.prioridad === 'low') {
+                return -1
+            } else if (a.prioridad === 'normal' && b.prioridad === 'high') {
+                return 1
+            } else if (a.prioridad === 'low' && b.prioridad === 'high') {
+                return 1
+            } else if (a.prioridad === 'low' && b.prioridad === 'normal') {
+                return 1
+            } else {
+                return 0
+            }
+        });
+
+        // localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
+        return Tarea.tareas;
+    }
+
+
     static borrarTarea(titulo) {
         Tarea.tareas = Tarea.tareas.filter(tarea => tarea.titulo !== titulo);
         localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
