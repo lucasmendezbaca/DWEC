@@ -11,7 +11,7 @@
     
     <div id="app">
         <button :disabled="permitirAddEntrada" @click="cambiarVisibilidad()">Ver texto entradas</button>
-        <div v-bind:id="entrada.id" v-for="entrada in entradas">
+        <div v-bind:id="entrada.id" v-for="entrada in entradasEspana">
             <h2>{{ entrada.titulo }}</h2>
             <p v-if="verEntradas">{{ entrada.texto }}</p>
             <p v-else>Pulsa el botón si quieres ver el texto completo</p>
@@ -19,6 +19,7 @@
         </div>
 
         <h3>Actualmente tenemos {{ numeroEntradas() }} artículos</h3>
+        <h3>Actualmente tenemos {{ entradasEspana }} artículos de España</h3>
     </div>
 
     <script src="index.js"></script>
