@@ -19,12 +19,22 @@ tareaInput.addEventListener('keypress', (e) => {
         let tarea = new Tarea(tareaInput.value);
         tarea.guardar();
         mostrarTarea(tarea);
+            
+
         actualizarNumTareas();
         actualizarTareasPendientes();
 
         tareaInput.value = '';
     }
 });
+
+function actualizarMinutosTareas() {
+    tareaContainer.querySelectorAll('.tarea').forEach(tareaElement => {
+        let titulo = tareaElement.querySelector('.tarea__info__nombre').textContent;
+        tareaElement.querySelector('.tarea__temporizador').textContent = `Añadido hace ${Tarea.getTiempo(titulo)} minutes ago`;
+    });
+}
+
 
 borrarTareas.addEventListener('click', () => {
     Tarea.borrarCompletadas();
@@ -75,7 +85,7 @@ function mostrarTarea(tarea) {
                 <button class="tarea__borrar"><div class="tarea__borrar__icono"><img src="img/trash.svg" alt=""></div></button>
             </div>
             <div class="tarea__prioridad">
-                <p>Prioridad:</p> <p><span class="prioridad low"><img src="img/chevron-down.svg">Low</span> <span class="prioridad normal">Normal</span> <span class="prioridad high">High<img src="img/chevron-up.svg"></span></p> <p class="tarea__temporizador">Añadido hace 6 minutes ago</p>
+                <p>Prioridad:</p> <p><span class="prioridad low"><img src="img/chevron-down.svg">Low</span> <span class="prioridad normal">Normal</span> <span class="prioridad high">High<img src="img/chevron-up.svg"></span></p> <p class="tarea__temporizador">Añadido hace 0 minutes ago</p>
             </div>
     `;
 
@@ -87,6 +97,9 @@ function mostrarTarea(tarea) {
     habilitarBorrado(tarea, tareaElement);
     habilitarCambioEstado(tarea, tareaElement); 
     habilitarCambioPrioridad(tarea, prioridades);
+    setInterval(() => {
+        actualizarMinutosTareas();
+    }, 1000);
 }
 
 function mostrarPrioridad(tarea, prioridades) {

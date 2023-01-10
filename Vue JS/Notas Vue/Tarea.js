@@ -1,5 +1,5 @@
 class Tarea {
-    static tareas = [];
+    static tareas = JSON.parse(localStorage.getItem('tareas')) || [];
 
     constructor (titulo, prioridad = 'low', estado = 'pendiente', fecha = new Date()) {
         this.titulo = titulo
@@ -48,10 +48,6 @@ class Tarea {
         });
 
         localStorage.setItem('tareas', JSON.stringify(Tarea.tareas));
-<<<<<<< HEAD
-        // return Tarea.tareas;
-=======
->>>>>>> e2cd6371b2b0aa67fb08264d6abdecf2a75b6efc
     }
 
 

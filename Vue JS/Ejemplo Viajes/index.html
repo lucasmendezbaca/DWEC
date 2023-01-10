@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <button :disabled="permitirAddEntrada" @click="cambiarVisibilidad()">Ver texto entradas</button>
+        <div v-bind:id="entrada.id" v-for="entrada in entradasEspana">
+            <h2>{{ entrada.titulo }}</h2>
+            <p v-if="verEntradas">{{ entrada.texto }}</p>
+            <p v-else>Pulsa el botón si quieres ver el texto completo</p>
+            <a :href="entrada.url">Ir a la entrada</a>
+        </div>
+
+        <h3>Actualmente tenemos {{ numeroEntradas() }} artículos</h3>
+        <h3>Actualmente tenemos {{ entradasEspana }} artículos de España</h3>
+    </div>
+
+    <script src="index.js"></script>
+
+</body>
+</html>
