@@ -13,14 +13,23 @@
         <h1>Lista de tareas - Lucas</h1>
         <input v-on:keyup.enter="crearTarea()" v-model="titulo" type="text" name="tarea_input" id="tarea_input" placeholder="¿Qué quieres recordar?">
 
+        <input v-on:keyup.enter="crearTarea()" v-model="filtroTitulo" type="text" name="fliltro_titulo" id="fliltro_titulo" placeholder="Filtrar por titulo">
+
         <hr>
         <div class="num_tareas">
             <p class="num_tareas__info"><img src="img/line-chart.svg" alt=""><span id="numTareasPendientes">{{ numTareasPendientes }}</span>&nbsp;tareas pendientes de un total de&nbsp;<span id="numTareas">{{ numTareas }}</span></p>  <p @click="borrarCompletadas()" id="borrarTareas"><img src="img/close.svg" alt="">Borrar tareas completadas</p>
         </div>
         <hr>
 
-        <section id="tareas" class="tareas" v-for="tarea in tareasOrdenadas" :key="tarea.titulo">
-            <div class="tarea">
+
+
+            <section id="tareas" class="tareas">
+        <!-- <template v-if="filtroTitulo">
+            <div class="tarea" v-for="tarea in filtrarPorTitulo" :key="tarea.titulo">
+        </template> -->
+        <!-- <template v-if="1 > 0"> -->
+            <div class="tarea" v-for="tarea in tareasOrdenadas" :key="tarea.titulo">
+        <!-- </template> -->
                 <div class="tarea__info">
                     <div @click="actualizarEstadoTarea(tarea.titulo)" class="check" :class="{ checked: isCompleted(tarea.estado) }"></div>
                     <p class="tarea__info__nombre" :class="{ 'tarea__info__nombre--checked': isCompleted(tarea.estado) }">{{ tarea.titulo }}</p>

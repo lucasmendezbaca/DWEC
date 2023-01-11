@@ -7,6 +7,8 @@ const { createApp } = Vue
         return {
             tareasModelo: JSON.parse(localStorage.getItem('tareas')) || [],
             titulo: '',
+            filtroTitulo: '',
+            flitroPrioridad: ''
         }
         },
         methods: {
@@ -56,6 +58,12 @@ const { createApp } = Vue
             },
             numTareasPendientes() {
                 return this.tareasModelo.filter(tarea => tarea.estado == 'pendiente').length;
+            },
+            filtrarPorTitulo() {
+                return this.tareasModelo.filter(tarea => tarea.titulo.includes(this.filtroTitulo));
+            },
+            filtrarPorPrioridad() {
+                return this.filtrarPorTituos.filter(tarea => tarea.prioridad == this.flitroPrioridad);
             },
             tareasOrdenadas() {
                 return this.tareasModelo.sort((a, b) => {

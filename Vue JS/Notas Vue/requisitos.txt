@@ -1,7 +1,0 @@
-añadir nota
-añadir filtros
-	por titulo
-	por prioridad
-borrar nota
-cambiar prioridad
-borrado de nota
